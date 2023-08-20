@@ -1,8 +1,8 @@
-package br.com.novare.entities.paginador
+package br.com.novare.entities.usuario
 
 import br.com.novare.entities.exception.BusinessException
 
-class PaginadorInvalidoException(
+class UsuarioInvalidoException(
     override val message: String,
     override val status: Int = 400
 ) : BusinessException(message, status) {

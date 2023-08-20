@@ -1,6 +1,6 @@
 package br.com.novare.usecase.usuario.listar
 
-import br.com.novare.entities.paginador.PaginadorEntity
+import br.com.novare.entities.paginador.Paginador
 import br.com.novare.usecase.paginador.PaginadorOutputData
 
 class UsuarioListagemInteractor(
@@ -8,7 +8,7 @@ class UsuarioListagemInteractor(
 ) : UsuarioListagemBoundary {
 
     override fun listar(limite: Int, pagina: Long): PaginadorOutputData {
-        val paginador = PaginadorEntity(limite, pagina)
+        val paginador = Paginador(limite, pagina)
         return gateway.listar(paginador)
     }
 }

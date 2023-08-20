@@ -9,9 +9,9 @@ class PaginadorTest {
     @Test
     fun `deve retornar uma excecao quando o limit for menor que zero`() {
         val limit = -1
-        val offset = 0
+        val offset = 0L
         val excecao = assertThrows(PaginadorInvalidoException::class.java) {
-            PaginadorEntity(limit, offset)
+            Paginador(limit, offset)
         }
         assertEquals("Limit deve ser maior ou igual a zero", excecao.message)
     }

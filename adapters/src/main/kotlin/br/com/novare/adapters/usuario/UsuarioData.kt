@@ -1,6 +1,7 @@
 package br.com.novare.adapters.usuario
 
 import br.com.novare.adapters.perfilacesso.PerfilAcesso
+import br.com.novare.entities.usuario.UsuarioStatus
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
 import java.time.LocalDateTime
