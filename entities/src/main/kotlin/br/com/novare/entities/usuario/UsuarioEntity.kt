@@ -2,7 +2,7 @@ package br.com.novare.entities.usuario
 
 import java.time.LocalDateTime
 
-data class Usuario(
+data class UsuarioEntity(
     val id: Long?,
     val nome: String,
     val email: String,

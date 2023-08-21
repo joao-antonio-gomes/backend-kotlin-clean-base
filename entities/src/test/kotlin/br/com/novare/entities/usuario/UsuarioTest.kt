@@ -11,7 +11,7 @@ class UsuarioTest {
 
     @Test
     fun `deve criar um usuario`() {
-        Usuario(
+        UsuarioEntity(
             id = null,
             nome = "Teste",
             email = "teste@email.com",
@@ -26,7 +26,7 @@ class UsuarioTest {
     @Test
     fun `deve lancar exception quando nome for vazio`() {
         val exception = assertThrows<UsuarioInvalidoException> {
-            Usuario(
+            UsuarioEntity(
                 id = null,
                 nome = "",
                 email = "teste@email.com",
@@ -51,7 +51,7 @@ class UsuarioTest {
     )
     fun `deve lancar exception quando senha for invalida`(senha: String) {
         val exception = assertThrows<UsuarioInvalidoException> {
-            Usuario(
+            UsuarioEntity(
                 id = null,
                 nome = "Teste",
                 email = "teste@email.com",

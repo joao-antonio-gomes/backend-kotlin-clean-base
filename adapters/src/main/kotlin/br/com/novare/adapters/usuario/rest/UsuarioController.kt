@@ -26,6 +26,15 @@ class UsuarioController(
         return ResponseEntity.ok(usuarios)
     }
 
+    @GetMapping("{idUsuario}/possui-permissao/{idPermissao}")
+    fun possuiPermissao(
+        @PathVariable("idUsuario") idUsuario: Long,
+        @PathVariable("idPermissao") idPermissao: Long
+    ): ResponseEntity<*> {
+        val usuarioPossuiPermissao = usuarioListagemBoundary.possuiPermissao(idUsuario, idPermissao)
+        return ResponseEntity.ok(usuarioPossuiPermissao)
+    }
+
     @PostMapping
     fun cadastrar(
         @RequestBody usuario: UsuarioCadastroInputData,
@@ -37,10 +46,5 @@ class UsuarioController(
         val uri = "$requestURL/$id"
         response.setHeader("Location", uri)
         return ResponseEntity.created(URI(uri)).build<Any>()
-    }
-
-    @GetMapping("/possui-permissao/{id}")
-    fun possuiPermissao(@PathVariable("id") idUsuario: Long?): ResponseEntity<*> {
-        return ResponseEntity.ok("possuiPermissao")
     }
 }

@@ -5,5 +5,6 @@ data class UsuarioListagemOutputData(
     val nome: String,
     val email: String,
     val avatarUrl: String?,
-    val ativo: Boolean
+    val ativo: Boolean,
+    val admin: Boolean
 )

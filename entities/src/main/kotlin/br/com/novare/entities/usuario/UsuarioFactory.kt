@@ -7,5 +7,5 @@ interface UsuarioFactory {
         senha: String,
         admin: Boolean,
         avatarUrl: String?
-    ): Usuario
+    ): UsuarioEntity
 }

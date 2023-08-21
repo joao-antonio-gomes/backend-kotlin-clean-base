@@ -1,6 +1,7 @@
 package br.com.novare.usecase.usuario.cadastrar
 
 import br.com.novare.entities.usuario.UsuarioFactory
+import br.com.novare.usecase.usuario.exception.UsuarioJaExisteComEmailException
 
 class UsuarioCadastroInteractor(
     val gateway: UsuarioCadastroGateway,

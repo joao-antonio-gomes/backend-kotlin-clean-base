@@ -1,9 +1,9 @@
 package br.com.novare.adapters.usuario
 
 import br.com.novare.entities.paginador.Paginador
-import br.com.novare.entities.usuario.Usuario
-import br.com.novare.entities.usuario.UsuarioStatus
+import br.com.novare.entities.usuario.UsuarioEntity
 import br.com.novare.usecase.paginador.PaginadorOutputData
+import br.com.novare.usecase.permissao.PermissaoOutputData
 import br.com.novare.usecase.usuario.cadastrar.UsuarioCadastroGateway
 import br.com.novare.usecase.usuario.listar.UsuarioListagemGateway
 import br.com.novare.usecase.usuario.listar.UsuarioListagemOutputData
@@ -21,13 +21,7 @@ class JpaUsuarioAdapter(val jpaUsuarioRepository: JpaUsuarioRepository) : Usuari
         val usuariosPaginados = jpaUsuarioRepository.findAll(pageable)
 
         val usuarios = usuariosPaginados.content.map { usuario ->
-            UsuarioListagemOutputData(
-                id = usuario.id!!,
-                nome = usuario.nome,
-                email = usuario.email,
-                avatarUrl = usuario.avatarUrl,
-                ativo = usuario.status == UsuarioStatus.ATIVO
-            )
+            usuario.toUsuarioListagemOutputData()
         }
 
         return PaginadorOutputData(
@@ -38,12 +32,26 @@ class JpaUsuarioAdapter(val jpaUsuarioRepository: JpaUsuarioRepository) : Usuari
         )
     }
 
+    override fun findById(idUsuario: Long): UsuarioListagemOutputData? {
+        val usuarioData = jpaUsuarioRepository.findById(idUsuario)
+        return usuarioData.map { usuario ->
+            usuario.toUsuarioListagemOutputData()
+        }.orElse(null)
+    }
+
+    override fun findPermissoesUsuario(idUsuario: Long): Set<PermissaoOutputData> {
+        val permissoes = jpaUsuarioRepository.findPermissoesUsuario(idUsuario)
+        return permissoes.map { permissao ->
+            permissao.toPermissaoOutputData()
+        }.toSet()
+    }
+
     override fun existeUsuarioComEmail(email: String): Boolean {
         return jpaUsuarioRepository.existsByEmail(email)
     }
 
-    override fun cadastrar(usuario: Usuario): Long {
-        val usuarioData = UsuarioData(
+    override fun cadastrar(usuario: UsuarioEntity): Long {
+        val usuarioData = Usuario(
             nome = usuario.nome,
             email = usuario.email,
             senha = usuario.senha,

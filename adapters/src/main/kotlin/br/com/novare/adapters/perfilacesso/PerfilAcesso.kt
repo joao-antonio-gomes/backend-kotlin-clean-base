@@ -1,7 +1,7 @@
 package br.com.novare.adapters.perfilacesso
 
 import br.com.novare.adapters.permissao.Permissao
-import br.com.novare.adapters.usuario.UsuarioData
+import br.com.novare.adapters.usuario.Usuario
 import jakarta.persistence.*
 
 @Entity
@@ -20,7 +20,7 @@ data class PerfilAcesso(
     var ativo: Boolean = false,
 
     @ManyToMany(mappedBy = "perfisAcesso")
-    var usuarios: Set<UsuarioData>? = null,
+    var usuarios: Set<Usuario>? = null,
 
     @ManyToMany
     @JoinTable(

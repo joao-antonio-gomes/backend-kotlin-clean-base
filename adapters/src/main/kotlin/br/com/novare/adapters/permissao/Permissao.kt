@@ -1,6 +1,7 @@
 package br.com.novare.adapters.permissao
 
 import br.com.novare.adapters.perfilacesso.PerfilAcesso
+import br.com.novare.usecase.permissao.PermissaoOutputData
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
 
@@ -20,4 +21,13 @@ data class Permissao(
 
     @ManyToMany(mappedBy = "permissoes")
     var perfisAcesso: Set<PerfilAcesso>? = null,
-)
+) {
+    fun toPermissaoOutputData(): PermissaoOutputData {
+        return PermissaoOutputData(
+            id = this.id!!,
+            nome = this.nome,
+            descricao = this.descricao,
+            ativo = this.ativo,
+        )
+    }
+}

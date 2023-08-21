@@ -2,13 +2,14 @@ package br.com.novare.adapters.usuario
 
 import br.com.novare.adapters.perfilacesso.PerfilAcesso
 import br.com.novare.entities.usuario.UsuarioStatus
+import br.com.novare.usecase.usuario.listar.UsuarioListagemOutputData
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
 import java.time.LocalDateTime
 
 @Entity
 @Table(name = "usuario")
-data class UsuarioData(
+data class Usuario(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
@@ -42,4 +43,15 @@ data class UsuarioData(
         inverseJoinColumns = [JoinColumn(name = "perfil_acesso_id")]
     )
     var perfisAcesso: Set<PerfilAcesso>? = null,
-)
+) {
+    fun toUsuarioListagemOutputData(): UsuarioListagemOutputData {
+        return UsuarioListagemOutputData(
+            id = id!!,
+            nome = nome,
+            email = email,
+            avatarUrl = avatarUrl,
+            ativo = status == UsuarioStatus.ATIVO,
+            admin = admin
+        )
+    }
+}

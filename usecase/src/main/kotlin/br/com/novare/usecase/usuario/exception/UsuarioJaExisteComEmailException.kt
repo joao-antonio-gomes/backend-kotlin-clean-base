@@ -1,4 +1,4 @@
-package br.com.novare.usecase.usuario.cadastrar
+package br.com.novare.usecase.usuario.exception
 
 import br.com.novare.entities.exception.BusinessException
 

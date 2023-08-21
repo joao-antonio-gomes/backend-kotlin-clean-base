@@ -9,8 +9,8 @@ class UsuarioFactoryImpl : UsuarioFactory {
         senha: String,
         admin: Boolean,
         avatarUrl: String?
-    ): Usuario {
-        return Usuario(
+    ): UsuarioEntity {
+        return UsuarioEntity(
             id = null,
             nome = nome,
             email = email,
